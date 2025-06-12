@@ -1,0 +1,40 @@
+NETWORKING COMMANDS:
+
+tcpdump 
+
+tcpdump is a most powerful and widely used command-line packets sniffer or package 
+analyzer tool which is used to capture or filter TCP/IP packets that received or transferred over a 
+network on a specific interface for analysis. 
+
+netstat 
+
+Displays active TCP connections, ports on which the computer is listening, Ethernet 
+statistics, IP routing table, IPv4 statistics and IPv6 statistics. It indicates state of a TCP connection. 
+it's a helpful tool in finding problems and determining the amount of traffic on the network as a 
+performance measurement.
+
+ifconfig / ipconfig 
+
+Displays basic current TCP/IP network configuration. It is very useful to troubleshoot 
+networking problems. ipconfig/all is used to provide detailed information such as IP address, subnet 
+mask, MAC address, DNS server, DHCP server, default gateway etc. ipconfig/renew is used to 
+renew a DHCP assigned IP address whereas ipconfig/release is used to discard the assigned DHCP 
+IP address. 
+
+nslookup 
+
+It provides a command-line utility for querying DNS table of a DNS Server. It returns IP 
+address for the given host name. 
+
+traceroute / tracert
+
+Displays the path taken to a destination by sending ICMP Echo Request messages to the 
+destination with TTL field values. The path displayed is the list of nearest router interfaces taken 
+along each hop in the path between source host and destination. 
+
+ping
+
+Verifies IP-level connectivity to another TCP/IP computer by sending Internet Control 
+Message Protocol (ICMP) Echo Request messages. The receipt of corresponding Echo Reply 
+messages are displayed, along with round-trip times. Ping is the primary TCP/IP command used to 
+troubleshoot connectivity, reachability, and name resolution. 
