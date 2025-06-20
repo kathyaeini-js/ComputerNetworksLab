@@ -1,0 +1,57 @@
+package prgrms;
+
+import java.io.*; 
+import java.net.*; 
+
+class exp6a { 
+    public static void main(String args[]) { 
+        try { 
+            // Create server socket on port 3636
+            ServerSocket obj = new ServerSocket(3636); 
+            System.out.println("Server is waiting for connection...");
+
+            // Accept client connection
+            Socket obj1 = obj.accept(); 
+            System.out.println("Client connected.");
+
+            // Input stream to receive IP address from client
+            BufferedReader din = new BufferedReader(new InputStreamReader(obj1.getInputStream())); 
+
+            // Output stream to send MAC address to client
+            DataOutputStream dout = new DataOutputStream(obj1.getOutputStream()); 
+
+            // Static ARP table (IP to MAC mappings)
+            String[] ip = {"165.165.80.80", "165.165.79.1"}; 
+            String[] mac = {"6A:08:AA:C2", "8A:BC:E3:FA"}; 
+
+            while (true) { 
+                String str = din.readLine(); 
+                if (str == null || str.equalsIgnoreCase("exit")) { 
+                    break; // Exit if client disconnects or sends 'exit'
+                } 
+
+                boolean found = false; 
+                for (int i = 0; i < ip.length; i++) { 
+                    if (str.equals(ip[i])) { 
+                        dout.writeBytes(mac[i] + '\n'); 
+                        found = true; 
+                        break; 
+                    } 
+                } 
+
+                if (!found) { 
+                    dout.writeBytes("MAC not found\n"); 
+                } 
+            } 
+
+            // Close all resources
+            dout.close();
+            din.close();
+            obj1.close(); 
+            obj.close(); 
+
+        } catch (Exception e) { 
+            System.out.println("Error: " + e); 
+        } 
+    } 
+}
