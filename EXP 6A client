@@ -1,0 +1,37 @@
+package prgrms;
+
+import java.io.*; 
+import java.net.*; 
+import java.util.Scanner;
+
+public class exp6aClient {
+    public static void main(String[] args) {
+        try {
+            // Connect to server on localhost and port 3636
+            Socket obj = new Socket("localhost", 3636); 
+            BufferedReader din = new BufferedReader(new InputStreamReader(obj.getInputStream())); 
+            DataOutputStream dout = new DataOutputStream(obj.getOutputStream()); 
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println("Connected to ARP Server");
+            while (true) {
+                System.out.print("Enter IP address to get MAC (or type 'exit' to quit): ");
+                String ip = sc.nextLine(); 
+
+                dout.writeBytes(ip + "\n");
+
+                if (ip.equalsIgnoreCase("exit")) {
+                    break;
+                }
+
+                String response = din.readLine(); 
+                System.out.println("Server Response: " + response);
+            }
+
+            sc.close();
+            obj.close(); 
+        } catch (Exception e) {
+            System.out.println("Error: " + e); 
+        }
+    }
+}
