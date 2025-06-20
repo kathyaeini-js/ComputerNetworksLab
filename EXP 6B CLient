@@ -1,0 +1,41 @@
+package prgrms;
+
+import java.io.*;
+import java.net.*;
+
+class exp6bclient {
+    public static void main(String args[]) {
+        try {
+            // BufferedReader for user input
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+            // Create a socket to connect to the server
+            Socket clientSocket = new Socket("127.0.0.1", 3000);
+
+            // BufferedReader to read from the server
+            BufferedReader din = new BufferedReader(
+                new InputStreamReader(clientSocket.getInputStream())
+            );
+
+            // DataOutputStream to send to the server
+            DataOutputStream dout = new DataOutputStream(clientSocket.getOutputStream());
+
+            // Prompt user to enter MAC address
+            System.out.println("Enter the Physical Address (MAC): ");
+            String macInput = in.readLine();
+
+            // Send MAC address to the server
+            dout.writeBytes(macInput + '\n');
+
+            // Read and print the server's response
+            String response = din.readLine();
+            System.out.println("The Logical Address (IP) is: " + response);
+
+            // Close connection
+            clientSocket.close();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
